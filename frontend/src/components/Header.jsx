@@ -1,11 +1,24 @@
 import SearchInput from "./SearchInput";
 import { NavLink } from "react-router-dom";
-
-<style>
-
-</style>
-
+import { CirclePlus } from 'lucide-react';
+import Dropdown from "./Dropdown";
 function Header() {
+    
+    const dropdownMenuItem = [
+        {
+            title: "New File",
+            sourceUrl: "create-file" 
+        },
+        {
+            title: "Create Folder",
+            sourceUrl: "create-folder" 
+        },
+        {
+            title: "Upload files",
+            sourceUrl: "upload-files" 
+        },
+    ];
+
     return (
         <>
             <div className="font-sans">
@@ -35,17 +48,34 @@ function Header() {
                                    } 
                                 </div>
                                 <div className="w-1/4 text-right flex items-center justify-end text-white">
-                                    <div className="flex justify-center space-x-4">
-                                        <NavLink to="/login">
-                                            <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-150 ease-in-out">
-                                                Login
-                                            </button>
-                                        </NavLink>
-                                        <NavLink to="/register">
-                                            <button className="bg-green-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75 transition duration-150 ease-in-out">
-                                                Sign Up
-                                            </button>
-                                        </NavLink>
+                                    <div className="flex justify-center space-x-4 items-center">
+                                        {
+                                            // isAuthenticated
+                                            true ?                   
+                                             <>
+                                              
+                                              <Dropdown
+                                                name={ <CirclePlus /> }
+                                                itemList={dropdownMenuItem}
+                                             />
+                                            
+
+                                              <span> Welcome </span>
+                                             </>  : 
+                                            <>
+                                                <NavLink to="/login">
+                                                    <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-150 ease-in-out">
+                                                        Login
+                                                    </button>
+                                                </NavLink>
+
+                                                <NavLink to="/register">
+                                                    <button className="bg-green-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75 transition duration-150 ease-in-out">
+                                                        Sign Up
+                                                    </button>
+                                                </NavLink>
+                                            </>
+                                        }   
                                     </div>
                                 </div>
                             </div>
