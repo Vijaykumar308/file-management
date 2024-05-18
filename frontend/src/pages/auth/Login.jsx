@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
  function Login() {
   return (
     <div className="bg-gray-100 flex justify-center items-center h-screen">
@@ -25,14 +27,14 @@
     </div>
    
     <div className="mb-6 text-blue-500">
-      <a href="#" className="hover:underline">Forgot Password?</a>
+      <NavLink to="#" className="hover:underline">Forgot Password?</NavLink>
     </div>
    
     <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full">Login</button>
   </form>
  
   <div className="mt-6 text-blue-500 text-center">
-    <a href="#" className="hover:underline">Sign up Here</a>
+    <NavLink to="/register" className="hover:underline">Sign up Here</NavLink>
   </div>
 </div>
 </div>
