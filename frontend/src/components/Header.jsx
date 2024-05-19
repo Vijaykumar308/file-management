@@ -2,8 +2,9 @@ import SearchInput from "./SearchInput";
 import { NavLink } from "react-router-dom";
 import { CircleUser, File, FolderOpen, Upload  } from 'lucide-react';
 import Dropdown from "./Dropdown";
+
 function Header() {
-    
+        
     const dropdownMenuItem = [
         {
             title: "Welcome User",
@@ -23,7 +24,7 @@ function Header() {
         <>
             <div className="font-sans">
                 <div className="bg-white">
-                    <div className="bg-slate-600 mb-6">
+                    <div className="bg-slate-600">
                         <div className="container mx-auto px-8">
                             <div className="flex items-center py-2 px-10">
                                 
