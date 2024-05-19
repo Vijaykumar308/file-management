@@ -31,7 +31,7 @@ const Dropdown = ({name, itemList}) => {
                 <div className="absolute mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg">
                     {
                         itemList.map((item, index)=> {
-                            return <NavLink to={`/${item.sourceUrl}`} className="block text-left px-4 py-2 text-gray-800 hover:bg-gray-100">{item.title}</NavLink>
+                            return <NavLink to={`/${item.sourceUrl}`} key={index} className="block text-left px-4 py-2 text-gray-800 hover:bg-gray-100">{item.title}</NavLink>
                         })
                     } 
                 </div>
