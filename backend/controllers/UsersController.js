@@ -1,6 +1,7 @@
 const User = require("../models/UserModel"); 
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+
 /**
  * 
  *  
@@ -75,15 +76,28 @@ const loginUser = async (req, res) => {
             }
         );
         userExist.password = undefined;
-        res.status(201).json({username:userExist.username, email:userExist.email, token});
+
+        // cookie section
+        const options = {
+            expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
+            httpOnly:true,
+        };
+        res.status(200).cookie("token", token, options).json({
+            success:true,
+            token,
+            username:userExist.username, 
+            email:userExist.email
+        });
     }
     else {
         res.status(200);
         res.json("Invalid credentials");
     }
-
-    // res.status(200);
-    // res.json("Ready to login");
 }
 
-module.exports = {registerUser, loginUser};
+
+const homepage = async(req, res) => {
+    res.status(200).json("this is the home page");
+}
+
+module.exports = {registerUser, loginUser, homepage};
