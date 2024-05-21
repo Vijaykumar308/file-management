@@ -3,7 +3,6 @@ import './App.css';
 import routes from "./routes/routes";
 
 function App() {
-
   return (
     <>
     <Routes>
