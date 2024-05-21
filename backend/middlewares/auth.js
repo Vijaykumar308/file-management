@@ -2,9 +2,6 @@ const jwt = require("jsonwebtoken");
 
 
 const auth = (req, res, next) => {
-
-    console.log(req.cookies);
-
     const {token} = req.cookies;
 
     // if no token, stop here
@@ -16,7 +13,6 @@ const auth = (req, res, next) => {
     try{
         const decode = jwt.verify(token, process.env.SECERT_TOKEN_KEY);
         req.user = decode;
-        // console.log("decoded value", decode);
     }
     catch(err) {
         console.log(err);
