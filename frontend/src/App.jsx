@@ -1,8 +1,5 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import HomePage from './pages/HomePage';
-import Login from './pages/auth/Login';
-import Register from './pages/auth/Register';
 import routes from "./routes/routes";
 
 function App() {
