@@ -10,6 +10,8 @@ const port = process.env.PORT || 4000
 
 connectDB(process.env.DB);
 
+app.use(cros());
+
 app.use(express.json());
 app.use(cookieParser());
 
