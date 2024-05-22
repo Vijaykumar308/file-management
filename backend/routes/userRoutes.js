@@ -2,6 +2,7 @@ const express = require("express");
 const {registerUser, loginUser, homepage } = require("../controllers/UsersController");
 const auth  = require("../middlewares/auth");
 
+
 const router = express.Router();
 
 // Public Routes;

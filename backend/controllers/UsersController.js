@@ -2,6 +2,8 @@ const User = require("../models/UserModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+
+
 /**
  * 
  *  
@@ -47,7 +49,7 @@ const registerUser =  async (req, res) => {
 
 const loginUser = async (req, res) => {
     const {username, password} = req.body;
-
+    // console.log(username, password);
     if(!(username && password)) {
         res.status(400);
         res.json("All fields are mandatory");
@@ -82,7 +84,7 @@ const loginUser = async (req, res) => {
             expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
             httpOnly:true,
         };
-        res.header('Access-Control-Allow-Origin', '*');
+
         res.status(200).cookie("token", token, options).json({
             success:true,
             token,
