@@ -20,6 +20,10 @@ function Header() {
         },
     ];
 
+    const handleCreateFolder = () => {
+       
+    }
+
     return (
         <>
             <div className="font-sans">
@@ -47,7 +51,7 @@ function Header() {
                                                     <File /> <span>New File</span>
                                                 </button>
 
-                                                <button className="flex items-center flex-col">
+                                                <button className="flex items-center flex-col" onClick={() =>handleCreateFolder()}>
                                                     <FolderOpen /> <span>Create Folder</span>
                                                 </button>
 
