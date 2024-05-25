@@ -25,7 +25,7 @@ function Header() {
     ];
 
     const handleCreateFolder = () => {
-        setShowFolder(prevDivs => [...prevDivs, { id: prevDivs.length }]);;
+        setShowFolder(prevDivs => [...prevDivs, { id: prevDivs.length, name: "picture" }]);;
     }
 
     return (
