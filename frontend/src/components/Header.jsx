@@ -2,10 +2,13 @@ import SearchInput from "./SearchInput";
 import { NavLink } from "react-router-dom";
 import { CircleUser, File, FolderOpen, Upload  } from 'lucide-react';
 import Dropdown from "./Dropdown";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AppContext } from "../context/AppContext";
 
 function Header() {
     const [openFolderNameModal, setOpenFolderNameModal] = useState(false);
+    const  {setShowFolder}  = useContext(AppContext);
+
     const dropdownMenuItem = [
         {
             title: "Welcome User",
@@ -22,7 +25,7 @@ function Header() {
     ];
 
     const handleCreateFolder = () => {
-        
+        setShowFolder(prevDivs => [...prevDivs, { id: prevDivs.length }]);;
     }
 
     return (
