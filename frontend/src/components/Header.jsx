@@ -38,7 +38,6 @@ function Header() {
         setInputValue(value);
         closeModal();
         handleCreateFolder(value)
-        // console.log('Value from Modal:', value); // You can use this value as needed
     };
     
     return (
