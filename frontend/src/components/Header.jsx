@@ -2,12 +2,14 @@ import SearchInput from "./SearchInput";
 import { NavLink } from "react-router-dom";
 import { CircleUser, File, FolderOpen, Upload  } from 'lucide-react';
 import Dropdown from "./Dropdown";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
+import OpenInputModal from "./OpenInputModal";
 
 function Header() {
-    const [openFolderNameModal, setOpenFolderNameModal] = useState(false);
     const  {setShowFolder}  = useContext(AppContext);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [inputValue, setInputValue] = useState('');
 
     const dropdownMenuItem = [
         {
@@ -24,10 +26,21 @@ function Header() {
         },
     ];
 
-    const handleCreateFolder = () => {
-        setShowFolder(prevDivs => [...prevDivs, { id: prevDivs.length, name: "picture" }]);;
+    const handleCreateFolder = (value) => {
+        setShowFolder(prevDivs => [...prevDivs, { id: prevDivs.length, name: value }]);;
     }
 
+    
+    const openModal  = () => setIsModalOpen(true); 
+    const closeModal = () => setIsModalOpen(false);
+
+    const handleSave = (value) => {
+        setInputValue(value);
+        closeModal();
+        handleCreateFolder(value)
+        console.log('Value from Modal:', value); // You can use this value as needed
+    };
+    
     return (
         <>
             <div className="font-sans">
@@ -42,6 +55,8 @@ function Header() {
                                     </div>
                                     
                                     <SearchInput />
+                                    {/* {isModalOpen.toString()} */}
+                                   { isModalOpen && <OpenInputModal onClose={closeModal} onSave={handleSave} />}
 
                                    {
                                     (true) &&
@@ -55,7 +70,11 @@ function Header() {
                                                     <File /> <span>New File</span>
                                                 </button>
 
-                                                <button className="flex items-center flex-col" onClick={() =>handleCreateFolder()}>
+                                                {/* <button className="flex items-center flex-col" onClick={() =>handleCreateFolder()}>
+                                                    <FolderOpen /> <span>Create Folder</span>
+                                                </button> */}
+
+                                                <button className="flex items-center flex-col" onClick={openModal}>
                                                     <FolderOpen /> <span>Create Folder</span>
                                                 </button>
 
