@@ -17,7 +17,7 @@ function OpenInputModal({onClose, onSave }) {
         <div className="modal-content bg-white p-6 rounded-lg shadow-lg">
           <button className="close cursor-pointer text-gray-500 hover:text-gray-700"
            onClick={() => onClose(false)}>&times;</button>
-          <form id="modalForm" className="mt-4">
+          {/* <form id="modalForm" className="mt-4"> */}
             <label htmlFor="inputBox" className="block text-gray-700">Folder Name:</label>
 
             <input 
@@ -37,7 +37,7 @@ function OpenInputModal({onClose, onSave }) {
               >
                 Save
               </button>
-          </form>
+          {/* </form> */}
         </div>
       </div>
     </>
