@@ -1,30 +1,47 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "../components/Header";
 import NavigatorHeader from "../components/NavigatorHeader";
 import WrapperComponent from "../components/WrapperComponent";
 import { AppContext } from "../context/AppContext";
 import  FolderComponent from "../components/FolderComponent";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchDirectories } from "../redux/dirReducer";
+
 
 
 function HomePage() {
-
-  const {showFolder} = useContext(AppContext);
+  const {showFolder, setShowFolder} = useContext(AppContext);
   const [navigatorPath,setNavigatorPath] = useState([])
-  console.log(showFolder);
+  const dispatch = useDispatch();
+  const {dir, status, error} = useSelector(state => state.dir);
 
   const handleFolderClick= (folderName)=>{
     setNavigatorPath([...navigatorPath,folderName])
   }
-
+  
   const handleGoBack =()=>{   
     const updatedPath = navigatorPath.slice(0, -1);
     setNavigatorPath(updatedPath);
     console.log(navigatorPath);
   }
-
-
   
-  
+  useEffect(()=> {
+    dispatch(fetchDirectories("6652a43278655daffeccad5f"));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (status === 'succeeded') {
+      setShowFolder(dir);
+    }
+  }, [status, dir]);
+
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
+
+  if (status === 'failed') {
+    return <div>Error: {error}</div>;
+  }
 
 
   return (
@@ -37,9 +54,9 @@ function HomePage() {
         <div className="grid grid-cols-5 place-items-center">
             {
             // const randomNumber = Math.floor(Math.random(10) * 10);
-            showFolder.map(folderInfo => (
-              <FolderComponent key={folderInfo.id}
-              folderName={folderInfo.name}
+            showFolder.map((folderInfo) => (
+              <FolderComponent key={folderInfo._id}
+              folderName={folderInfo.dirName}
               handleFolderClick={handleFolderClick}
               
               />

@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./userReducer";
-import dirReducer from "./dirReducer";
+import dirReducer, { fetchDirectories } from "./dirReducer";
 
 
 const store = configureStore({
@@ -9,5 +9,6 @@ const store = configureStore({
         dir:dirReducer
     }
 });
+
 
 export default store; 

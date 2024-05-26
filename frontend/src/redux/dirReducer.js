@@ -1,19 +1,48 @@
-import { CREATE_DIR } from "./dirActions";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { CREATE_DIR, FETCH_ALL_DIR } from "./dirActions";
+import axios from "axios";
+import { hostName } from "../config";
 
 const initialState = {
-  dir: {},
+  dir: [],
+  status: 'idle',
+  error: null
 };
 
-const dirReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case CREATE_DIR:
-      return {
-        ...state,
-        dir: action.payload,
-      };
-    default:
-      return state;
+// Define the async thunk
+export const fetchDirectories = createAsyncThunk(
+  'dir/fetchDirectories', // Action type
+  async (userId, thunkAPI) => {
+    try {
+      const response = await axios.post(`${hostName}/users/fetchDirectories`, { user_id: userId });
+      return response.data; // This will be the action.payload
+    } catch (error) {
+      console.error(error);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
   }
-};
+);
 
-export default dirReducer;
+const dirReducer = createSlice({
+  name: 'dir',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchDirectories.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchDirectories.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.dir = action.payload;
+      })
+      .addCase(fetchDirectories.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      });
+  }
+});
+
+
+
+export default dirReducer.reducer;

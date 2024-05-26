@@ -16,7 +16,7 @@ const createDirectory =  async (req, res) => {
 
     const dirCreated = await Directory.create({
         dirName : dirObj.dirName,
-        user_id : "4829y9y42y42jddn",
+        user_id : "6652a43278655daffeccad5f",
         type: dirObj.type
     });
 
@@ -25,5 +25,11 @@ const createDirectory =  async (req, res) => {
     res.json(dirCreated);
 }
 
+const fetchDirectories = async (req, res) => {
+    const dir = await Directory.find({user_id:req.body.user_id});
+    console.log(dir);
+    res.status(200).json(dir);
+}
 
-module.exports = createDirectory;
+
+module.exports = {createDirectory, fetchDirectories};
