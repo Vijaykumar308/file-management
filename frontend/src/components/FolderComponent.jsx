@@ -6,9 +6,9 @@ export default function FolderComponent({folderName,handleFolderClick}) {
   const {setShowFolder} = useContext(AppContext);
 
   const handleGoInside = () => {
-    setShowFolder([{ id: 101, name: "vijay"}]);
+    // setShowFolder([{ id: 101, name: "vijay"}]);
     handleFolderClick(folderName)
-    console.log('inside folder');
+   
   }
 
 

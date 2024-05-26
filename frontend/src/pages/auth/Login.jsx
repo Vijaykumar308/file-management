@@ -22,7 +22,9 @@ import { useSelector, useDispatch } from "react-redux";
       username, password
     }
 
-    dispatch(loginUser(userCredentials)).then((result) => {
+    dispatch(loginUser(userCredentials))
+    .then((result) => {
+      console.log("result",result)
       if(result.payload) {
         setUsername('');
         setPassword('');

@@ -17,21 +17,22 @@ function HomePage() {
   }
 
   const handleGoBack =()=>{   
-    const currrentFolder = navigatorPath[navigatorPath.length -1]
-    console.log(currrentFolder)
-    let index = navigatorPath.indexOf(currrentFolder);
-    if (index !== -1) {
-      const newPath = navigatorPath.splice(index, 1);
-      setNavigatorPath([...newPath])
+    const updatedPath = navigatorPath.slice(0, -1);
+    setNavigatorPath(updatedPath);
+    console.log(navigatorPath);
   }
-  }
+
+
+  
+  
 
 
   return (
     <>
       <Header />
       <NavigatorHeader navigatorPath={navigatorPath} />
-      <div onClick={handleGoBack}>Go back</div>
+      {navigatorPath.length > 0 && <div onClick={handleGoBack} style={{cursor:"pointer",outline:"1px solid gray",
+      width:"100px",margin:"1px 10px",textAlign:"center"}}>Go back</div>  } 
       <WrapperComponent> 
         <div className="grid grid-cols-5 place-items-center">
             {
