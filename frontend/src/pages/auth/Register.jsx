@@ -58,7 +58,8 @@ export default function Register() {
                                 <div className="flex -mx-3">
                                     <div className="w-full px-3 text-center">
                                         <span>Already Have an Account ? </span>
-                                        <NavLink to="/login" className="w-full max-w-xs mx-auto text-indigo-500 hover:text-indigo-700 text-white rounded-lg  py-3 from-neutral-400 text-sm capitalize">
+                                        <NavLink to="/login" className="w-full max-w-xs mx-auto text-indigo-500
+                                         hover:text-indigo-700 text-white rounded-lg  py-3 from-neutral-400 text-sm capitalize">
                                             Login
                                         </NavLink>
                                     </div>
