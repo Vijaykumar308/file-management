@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 
   // redux store
   const {isLoading, error} = useSelector(state => state.user);
-
+  
   const navigator = useNavigate();
   const dispatch = useDispatch();
 
