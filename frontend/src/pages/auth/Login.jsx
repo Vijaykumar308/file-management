@@ -91,8 +91,9 @@ import { useSelector, useDispatch } from "react-redux";
           </>
         }
       
-        <div className="mt-6 text-blue-500 text-center">
-          <NavLink to="/register" className="hover:underline">Sign up Here</NavLink>
+        <div className="mt-6  text-center">
+          <span>Don't Have an Account ? </span>
+          <NavLink to="/register" className="text-blue-500 hover:underline">Sign up</NavLink>
         </div>
       </div>
     </div>

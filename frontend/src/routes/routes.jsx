@@ -7,25 +7,25 @@ const routes = [
   { 
     path: '/', 
     element: <HomePage />,
-    isPrivate:false
+    isPrivate:true
   },
 
   { 
     path: '/register', 
     element: <Register />,
-    isPrivate:true
+    isPrivate:false
   },
 
   { 
     path: '/login',
     element: <Login />,
-    isPrivate:true
+    isPrivate:false
   },
 
   { 
     path: '*', 
     element: <NotFound />,
-    isPrivate:true
+    isPrivate:false
   },
 ];
 

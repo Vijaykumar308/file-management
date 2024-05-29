@@ -1,18 +1,13 @@
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import routes from "./routes/routes";
-import Login from './pages/auth/Login';
 import { useEffect, useState } from 'react';
+import {PrivateRoute, PublicRoute} from './components/ProtectedRoutes';
 
 function App() {
   const navigator = useNavigate();
-  const [isAuthencated, setIsAuthencated] = useState(true);
+  const [isAuthencated, setIsAuthencated] = useState(false);
 
-  useEffect(()=>{
-    if(!isAuthencated) {
-      navigator('/login');
-    }
-  }, [])
   return (
     <>
     <Routes>
@@ -22,7 +17,7 @@ function App() {
               <Route 
                 key={index} 
                 path={route.path} 
-                element={route.element} 
+                element={<PrivateRoute element={route.element} isAuthencated={isAuthencated} />} 
               />
             );
         }
@@ -31,7 +26,7 @@ function App() {
           <Route
             key={index}
             path={route.path}
-            element={route.element}
+            element={<PublicRoute element={route.element} isAuthencated={isAuthencated} />}
           />
         );
       })}

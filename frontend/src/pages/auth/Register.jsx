@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 export default function Register() {
     return (
@@ -52,6 +53,14 @@ export default function Register() {
                                 <div className="flex -mx-3">
                                     <div className="w-full px-3 mb-5">
                                         <button className="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold">REGISTER NOW</button>
+                                    </div>
+                                </div>
+                                <div className="flex -mx-3">
+                                    <div className="w-full px-3 text-center">
+                                        <span>Already Have an Account ? </span>
+                                        <NavLink to="/login" className="w-full max-w-xs mx-auto text-indigo-500 hover:text-indigo-700 text-white rounded-lg  py-3 from-neutral-400 text-sm capitalize">
+                                            Login
+                                        </NavLink>
                                     </div>
                                 </div>
                             </div>
