@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 import { loginUser } from "../../redux/userReducer";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,9 +9,10 @@ import { useSelector, useDispatch } from "react-redux";
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+
   // redux store
-  const {isLoading, error} = useSelector(state => state.user);
-  
+  const {loading, user, error} = useSelector(state => state.user);
+  const {isAuthecated} = useSelector(state => state.auth);
   const navigator = useNavigate();
   const dispatch = useDispatch();
 
@@ -22,13 +23,17 @@ import { useSelector, useDispatch } from "react-redux";
       username, password
     }
 
+    const authecation = ()=> {
+      return {type: "AUTHENCATION", payload: true};
+    }
+
     dispatch(loginUser(userCredentials))
     .then((result) => {
-      console.log("result",result)
       if(result.payload) {
         setUsername('');
         setPassword('');
-        navigator('/');
+        dispatch(authecation());
+        <Navigate to="/" />;
       }
     });
 
@@ -81,7 +86,7 @@ import { useSelector, useDispatch } from "react-redux";
           </div>
         
           <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full">
-            {isLoading ? "Loading..." : 'Login'}
+            {loading ? "Loading..." : 'Login'}
           </button>
         </form>
 

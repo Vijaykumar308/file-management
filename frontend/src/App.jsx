@@ -1,12 +1,11 @@
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import routes from "./routes/routes";
-import { useEffect, useState } from 'react';
 import {PrivateRoute, PublicRoute} from './components/ProtectedRoutes';
+import { useSelector } from 'react-redux';
 
 function App() {
-  const navigator = useNavigate();
-  const [isAuthencated, setIsAuthencated] = useState(false);
+  const {isAuthencated} = useSelector(state => state.auth);
 
   return (
     <>
