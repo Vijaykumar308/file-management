@@ -12,8 +12,6 @@ import { useSelector, useDispatch } from "react-redux";
 
   // redux store
   const {loading, user, error} = useSelector(state => state.user);
-  const {isAuthecated} = useSelector(state => state.auth);
-  const navigator = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogin = (e) => {
