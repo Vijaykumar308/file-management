@@ -1,4 +1,5 @@
 export const AUTHENCATION = "AUTHENCATION";
+export const LOGOUT = "LOGOUT";
 
 const initialState = {
     isAuthencated: false
@@ -13,6 +14,11 @@ const authReducer = (state = initialState, action) => {
                 isAuthencated: true
             }
 
+        case LOGOUT: 
+            return {
+                ...state,
+                isAuthencated: false
+            }
         default:
             return state;
     }
