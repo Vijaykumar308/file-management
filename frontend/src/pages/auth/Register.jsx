@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Navigate, useNavigate } from 'react-router-dom'
 import { hostName } from '../../config';
 
 export default function Register() {
@@ -19,17 +19,21 @@ export default function Register() {
         });
     };
    
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
          // Prepare the request options
         const requestOptions = {
-            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(userInfo)
         };
-
-        axios.post(`${hostName}/users/register`, );
+        try {
+            const response = await axios.post(`${hostName}/users/register`, userInfo, requestOptions);
+            
+            <Navigate to="/login" />
+        }
+        catch(error) {
+            console.log(error);
+        }
     }
 
     return (
