@@ -13,7 +13,7 @@ const registerUser =  async (req, res) => {
 
     if(!(username && fullname && email && password)) {
         res.status(400);
-        res.json("All fields are mandatory");
+        res.json({message:"All fields are mandatory"});
         return;
     }
 
@@ -52,7 +52,7 @@ const loginUser = async (req, res) => {
     // console.log(username, password);
     if(!(username && password)) {
         res.status(400);
-        res.json("All fields are mandatory");
+        res.json({message:"All fields are mandatory"});
         return;
     }
 
