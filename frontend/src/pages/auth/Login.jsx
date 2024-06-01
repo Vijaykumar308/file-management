@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { NavLink, Navigate } from "react-router-dom";
-import { loginUser } from "../../redux/userReducer";
+import { NavLink, } from "react-router-dom";
+import { loginUser} from "../../redux/userReducer";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { AUTHENCATION } from "../../redux/authReducer";
@@ -9,35 +9,59 @@ import { AUTHENCATION } from "../../redux/authReducer";
  function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
+  const [apiResError, setapiResError]  = useState('');
 
   // redux store
-  const {loading, error} = useSelector(state => state.user);
+  const {loading, userData, error} = useSelector(state => state.user);
+  // console.log(error);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // const handleLogin = (e) => {
+  //   e.preventDefault();
+
+  //   let userCredentials = {
+  //     username, password
+  //   }
+
+  //   const authecation = ()=> {
+  //     return {type: AUTHENCATION};
+  //   }
+
+  //   dispatch(loginUser(userCredentials))
+  //   .then((result) => {
+  //     if(result.payload) {
+  //       setUsername('');
+  //       setPassword('');
+  //       dispatch(authecation());
+  //       <Navigate to="/" />;
+  //     }
+  //   });
+
+  // }
 
   const handleLogin = (e) => {
     e.preventDefault();
-
-    let userCredentials = {
-      username, password
-    }
-
-    const authecation = ()=> {
-      return {type: AUTHENCATION};
-    }
+    const userCredentials = { username, password };
 
     dispatch(loginUser(userCredentials))
-    .then((result) => {
-      if(result.payload) {
-        setUsername('');
-        setPassword('');
-        dispatch(authecation());
-        <Navigate to="/" />;
-      }
-    });
-
-  }
-
+      .then((result) => {
+        console.log('my resut', result.payload);
+        if (userData?.status == 200 || result.payload.success) {
+          setUsername('');
+          dispatch({ type: AUTHENCATION });
+          setPassword('');
+          navigate('/');
+        }
+        else {
+          setapiResError(result.payload.message);
+          // console.log('sfsg', result.payload.message);
+        }
+      })
+      .catch((error) => {
+          console.log('xcvxv',error);
+      });
+  };
 
   return (
     <div className="bg-gray-100 flex justify-center items-center h-screen">
@@ -47,7 +71,11 @@ import { AUTHENCATION } from "../../redux/authReducer";
 
       <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
         <h1 className="text-2xl font-semibold mb-4">Login</h1>
-        <div className="hidden bg-red-400 py-2 px-4 capitalize rounded-md text-white">Invalid user</div>
+        {
+          apiResError && 
+        <div className="bg-red-400 py-2 px-4 capitalize rounded-md text-white">{apiResError}</div>
+        }
+
         <form onSubmit={handleLogin}>
         
           <div className="mb-4">
@@ -89,12 +117,6 @@ import { AUTHENCATION } from "../../redux/authReducer";
             {loading ? "Loading..." : 'Login'}
           </button>
         </form>
-
-        {
-          error && <>
-          <p>{error}</p>
-          </>
-        }
       
         <div className="mt-6  text-center">
           <span>Don't Have an Account ? </span>

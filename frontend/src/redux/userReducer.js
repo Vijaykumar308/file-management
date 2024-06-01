@@ -1,14 +1,19 @@
-import { createAsyncThunk, createSlice, isFulfilled } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { hostName } from "../config";
 
 export const loginUser = createAsyncThunk(
-    'user/loginUser',
-    async (userCredentials) => {
-        const request = await axios.post(`${hostName}/users/login`, userCredentials);
-        const response = await request.data;
-        localStorage.setItem("user", JSON.stringify(response));
-        return response;
+     'user/loginUser',
+     async (userCredentials) => {
+        try {
+            const request = await axios.post(`${hostName}/users/login`, userCredentials);
+            const response = request.data;  // Corrected this line to get the actual data
+            localStorage.setItem("user", JSON.stringify(response));
+            return response;
+        }
+        catch(error) {
+            return error.response.data;
+        }
     }
 );
 
@@ -22,24 +27,22 @@ const userSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(loginUser.pending, (state) => {
-                state.loading = true,
-                state.userData = null,
-                state.error = action.payload
+                state.loading = true;
+                state.userData = null;
+                state.error = null;
             })
             .addCase(loginUser.fulfilled, (state, action) => {
-                state.loading = false,
-                state.userData = action.payload,
-                state.error = null
+                state.loading = false;
+                state.userData = action.payload;
+                state.error = null;
             })
             .addCase(loginUser.rejected, (state, action) => {
-                state.loading = false,
-                state.userData = null,
-                state.error = action.payload
-            })
+                console.log(action);
+                state.loading = false;
+                state.userData = null;
+                state.error = action.error.message || "Failed to login";
+            });
     }
 });
-
-
-
 
 export default userSlice.reducer;
