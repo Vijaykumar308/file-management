@@ -3,6 +3,7 @@ import { NavLink, Navigate } from "react-router-dom";
 import { loginUser } from "../../redux/userReducer";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { AUTHENCATION } from "../../redux/authReducer";
 
 
  function Login() {
@@ -11,7 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 
   // redux store
-  const {loading, user, error} = useSelector(state => state.user);
+  const {loading, error} = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   const handleLogin = (e) => {
@@ -22,7 +23,7 @@ import { useSelector, useDispatch } from "react-redux";
     }
 
     const authecation = ()=> {
-      return {type: "AUTHENCATION", payload: true};
+      return {type: AUTHENCATION};
     }
 
     dispatch(loginUser(userCredentials))
@@ -46,6 +47,7 @@ import { useSelector, useDispatch } from "react-redux";
 
       <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
         <h1 className="text-2xl font-semibold mb-4">Login</h1>
+        <div className="hidden bg-red-400 py-2 px-4 capitalize rounded-md text-white">Invalid user</div>
         <form onSubmit={handleLogin}>
         
           <div className="mb-4">

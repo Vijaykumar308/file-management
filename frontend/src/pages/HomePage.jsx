@@ -6,6 +6,7 @@ import { AppContext } from "../context/AppContext";
 import  FolderComponent from "../components/FolderComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDirectories } from "../redux/dirReducer";
+import {jwtDecode} from "jwt-decode";
 
 
 
@@ -26,7 +27,10 @@ function HomePage() {
   }
   
   useEffect(()=> {
-    dispatch(fetchDirectories("6652a43278655daffeccad5f"));
+    const user = JSON.parse(localStorage.getItem('user'));
+    const decoded = jwtDecode(user.token);
+    console.log("decoded:",decoded);
+    dispatch(fetchDirectories(decoded.id));
   }, [dispatch]);
 
   useEffect(() => {

@@ -13,7 +13,7 @@ export const loginUser = createAsyncThunk(
 );
 
 const userSlice = createSlice({
-    name: "userzd",
+    name: "user",
     initialState: {
         loading: false,
         userData: null,
@@ -24,7 +24,7 @@ const userSlice = createSlice({
             .addCase(loginUser.pending, (state) => {
                 state.loading = true,
                 state.userData = null,
-                state.error = null
+                state.error = action.payload
             })
             .addCase(loginUser.fulfilled, (state, action) => {
                 state.loading = false,
