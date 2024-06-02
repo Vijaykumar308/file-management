@@ -93,8 +93,8 @@ const loginUser = async (req, res) => {
         });
     }
     else {
-        res.status(200);
-        res.json("Invalid credentials");
+        res.status(400);
+        res.json({status:400, message:"Invalid username or password"});
     }
 }
 
