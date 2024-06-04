@@ -9,16 +9,19 @@ const authReducer = (state = initialState, action) => {
 
     switch(action.type) {
         case AUTHENCATION:
+            
             return {
                 ...state,
-                isAuthencated: true
+                isAuthencated: action.payload || false
             }
 
         case LOGOUT: 
+            localStorage.removeItem("user");
             return {
                 ...state,
-                isAuthencated: false
+                isAuthencated: false,
             }
+
         default:
             return state;
     }

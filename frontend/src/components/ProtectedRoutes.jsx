@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
 export const PrivateRoute = ({element, isAuthencated}) => {
-    return isAuthencated ? element : <Navigate to="/login"/>
+    return isAuthencated ? element : <Navigate to="/login" />
 }
 
 
