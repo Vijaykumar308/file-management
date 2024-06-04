@@ -46,19 +46,17 @@ import { AUTHENCATION } from "../../redux/authReducer";
 
     dispatch(loginUser(userCredentials))
       .then((result) => {
-        console.log('my resut', result.payload);
         if (userData?.status == 200 || result.payload.success) {
           setUsername('');
-          dispatch({ type: AUTHENCATION });
+          dispatch({ type: AUTHENCATION, payload:true });
           setPassword('');
           navigate('/');
         }
         else {
           setapiResError(result.payload.message);
-          // console.log('sfsg', result.payload.message);
         }
       })
-      .catch((error) => {
+      .catch((error) => { 
           console.log('xcvxv',error);
       });
   };

@@ -7,6 +7,7 @@ import  FolderComponent from "../components/FolderComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDirectories } from "../redux/dirReducer";
 import {jwtDecode} from "jwt-decode";
+import { AUTHENCATION } from "../redux/authReducer";
 
 
 
@@ -15,6 +16,7 @@ function HomePage() {
   const [navigatorPath,setNavigatorPath] = useState([])
   const dispatch = useDispatch();
   const {dir, status, error} = useSelector(state => state.dir);
+  const {isAuthencated} = useSelector(state => state.auth);
 
   const handleFolderClick= (folderName)=>{
     setNavigatorPath([...navigatorPath,folderName])
@@ -27,11 +29,18 @@ function HomePage() {
   }
   
   useEffect(()=> {
-    const user = JSON.parse(localStorage.getItem('user'));
+    console.log('first time rander');
+    const userData = localStorage.getItem('user') || null;
+    const user = JSON.parse(userData) || null;
     const decoded = jwtDecode(user.token);
-    console.log("decoded:",decoded);
+    // console.log("decoded:",decoded);
     dispatch(fetchDirectories(decoded.id));
-  }, [dispatch]);
+
+    () => {
+      console.log('clen up function');
+    }
+
+  }, [dispatch, isAuthencated]);
 
   useEffect(() => {
     if (status === 'succeeded') {
