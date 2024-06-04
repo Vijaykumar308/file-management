@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { hostName } from "../config";
+import { LOGOUT } from "./authReducer";
 
 export const loginUser = createAsyncThunk(
      'user/loginUser',
@@ -41,6 +42,11 @@ const userSlice = createSlice({
                 state.loading = false;
                 state.userData = null;
                 state.error = action.error.message || "Failed to login";
+            })
+            .addCase(LOGOUT, (state) => {
+                state.loading = false;
+                state.userData = null; // Clear userData on logout
+                state.error = null;
             });
     }
 });
