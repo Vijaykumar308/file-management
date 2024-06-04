@@ -29,16 +29,11 @@ function HomePage() {
   }
   
   useEffect(()=> {
-    console.log('first time rander');
     const userData = localStorage.getItem('user') || null;
     const user = JSON.parse(userData) || null;
     const decoded = jwtDecode(user.token);
     // console.log("decoded:",decoded);
     dispatch(fetchDirectories(decoded.id));
-
-    () => {
-      console.log('clen up function');
-    }
 
   }, [dispatch, isAuthencated]);
 
