@@ -1,14 +1,14 @@
 import { useState } from "react";
 
 function OpenInputModal({onClose, onSave }) {
-  const [inputValue, setInputValue] = useState('');
+  const [folderName, setFolderName] = useState('');
 
   const handleInputChange = (e) => {
-    setInputValue(e.target.value)
+    setFolderName(e.target.value)
   }
 
   const handleSaveClicked = () => {
-    onSave(inputValue);
+    onSave(folderName);
   }
   
   return (
@@ -25,7 +25,7 @@ function OpenInputModal({onClose, onSave }) {
               id="inputBox" 
               name="inputBox" 
               className="w-full p-2 text-black mt-2 border border-gray-300 rounded" 
-              value={inputValue}
+              value={folderName}
               onChange={(e) => handleInputChange(e)}
               />
 
