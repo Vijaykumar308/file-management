@@ -39,8 +39,8 @@ function Header() {
     const openModal  = () => setIsModalOpen(true); 
     const closeModal = () => setIsModalOpen(false);
 
-    const handleSave = (value) => {
-        dispatch(createDir(value))
+    const handleSave = (value, userId) => {
+        dispatch(createDir(value, userId))
         setInputValue(value);
         closeModal();
         handleCreateFolder(value)

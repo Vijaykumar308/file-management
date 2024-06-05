@@ -16,7 +16,7 @@ const createDirectory =  async (req, res) => {
 
     const dirCreated = await Directory.create({
         dirName : dirObj.dirName,
-        user_id : "6652a43278655daffeccad5f",
+        user_id : dirObj.userId,
         type: dirObj.type
     });
 

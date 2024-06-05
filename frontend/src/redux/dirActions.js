@@ -6,8 +6,9 @@ export const CREATE_DIR = "CREATE_DIR";
 export const FETCH_ALL_DIR = "FETCH_ALL_DIR";
 
 
-export const createDir = (dirName) => {
+export const createDir = (dirName, userId) => {
   const dirObj = {
+    userId,
     dirName,
     type:"directory"
   }

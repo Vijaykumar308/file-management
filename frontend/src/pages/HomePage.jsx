@@ -63,10 +63,10 @@ function HomePage() {
             {
             // const randomNumber = Math.floor(Math.random(10) * 10);
             showFolder.map((folderInfo) => (
-              <FolderComponent key={folderInfo._id}
-              folderName={folderInfo.dirName}
-              handleFolderClick={handleFolderClick}
-              
+              <FolderComponent 
+                key={folderInfo._id}
+                folderName={folderInfo.dirName}
+                handleFolderClick={handleFolderClick}
               />
             ))}
         </div>

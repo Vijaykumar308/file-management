@@ -1,3 +1,4 @@
+import { jwtDecode } from "jwt-decode";
 import { useState } from "react";
 
 function OpenInputModal({onClose, onSave }) {
@@ -8,7 +9,9 @@ function OpenInputModal({onClose, onSave }) {
   }
 
   const handleSaveClicked = () => {
-    onSave(folderName);
+    const user = JSON.parse(localStorage.getItem('user')) || null;
+    const token = jwtDecode(user.token);
+    onSave(folderName, token.id);
   }
   
   return (
