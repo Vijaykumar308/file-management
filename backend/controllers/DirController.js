@@ -26,7 +26,7 @@ const createDirectory =  async (req, res) => {
 }
 
 const fetchDirectories = async (req, res) => {
-    const dir = await Directory.find({user_id:req.body.user_id});
+    const dir = await Directory.find({user_id:req.body.user_id, parent_directory_id:req.body.parent_directory_id});
     console.log(dir);
     res.status(200).json(dir);
 }

@@ -14,7 +14,7 @@ export const fetchDirectories = createAsyncThunk(
   'dir/fetchDirectories', // Action type
   async (userId, thunkAPI) => {
     try {
-      const response = await axios.post(`${hostName}/users/fetchDirectories`, { user_id: userId });
+      const response = await axios.post(`${hostName}/users/fetchDirectories`, { user_id: userId, parent_directory_id:'home'});
       return response.data; // This will be the action.payload
     } catch (error) {
       console.error(error);
