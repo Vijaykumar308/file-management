@@ -43,7 +43,6 @@ import { AUTHENCATION } from "../../redux/authReducer";
   const handleLogin = (e) => {
     e.preventDefault();
     const userCredentials = { username, password };
-
     dispatch(loginUser(userCredentials))
       .then((result) => {
         if (userData?.status == 200 || result.payload.success) {

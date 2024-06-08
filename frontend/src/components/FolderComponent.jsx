@@ -2,12 +2,12 @@ import { FolderOpen } from 'lucide-react';
 import { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 
-export default function FolderComponent({folderName,handleFolderClick}) {
+export default function FolderComponent({folderName, folderId, handleFolderClick}) {
   const {setShowFolder} = useContext(AppContext);
 
   const handleGoInside = () => {
     // setShowFolder([{ id: 101, name: "vijay"}]);
-    handleFolderClick(folderName)
+    handleFolderClick(folderName, folderId)
   }
 
   return (

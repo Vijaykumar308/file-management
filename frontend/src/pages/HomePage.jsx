@@ -18,7 +18,12 @@ function HomePage() {
   const {dir, status, error} = useSelector(state => state.dir);
   const {isAuthencated} = useSelector(state => state.auth);
 
-  const handleFolderClick= (folderName)=>{
+  const handleFolderClick= (folderName, folderId)=>{
+    const userData = localStorage.getItem('user') || null;
+    const user = JSON.parse(userData) || null;
+    const decoded = jwtDecode(user.token);
+    
+    dispatch(fetchDirectories({userId:decoded.id, parent_dir_id: folderId}));
     setNavigatorPath([...navigatorPath, folderName])
   }
   
@@ -33,7 +38,7 @@ function HomePage() {
     const user = JSON.parse(userData) || null;
     const decoded = jwtDecode(user.token);
     // console.log("decoded:",decoded);
-    dispatch(fetchDirectories(decoded.id));
+    dispatch(fetchDirectories({userId:decoded.id, parent_dir_id:'home'}));
 
   }, [dispatch, isAuthencated]);
 
@@ -66,6 +71,7 @@ function HomePage() {
               <FolderComponent 
                 key={folderInfo._id}
                 folderName={folderInfo.dirName}
+                folderId={folderInfo._id}
                 handleFolderClick={handleFolderClick}
               />
             ))}
