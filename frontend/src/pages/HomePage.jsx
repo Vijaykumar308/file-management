@@ -7,9 +7,6 @@ import  FolderComponent from "../components/FolderComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDirectories } from "../redux/dirReducer";
 import {jwtDecode} from "jwt-decode";
-import { AUTHENCATION } from "../redux/authReducer";
-
-
 
 function HomePage() {
   const {showFolder, setShowFolder} = useContext(AppContext);
@@ -87,7 +84,7 @@ function HomePage() {
             // const randomNumber = Math.floor(Math.random(10) * 10);
             showFolder.map((folderInfo) => (
               <FolderComponent 
-                key={folderInfo._id}
+                key={folderInfo._id ?? 'jfgjsdlfs'}
                 folderName={folderInfo.dirName}
                 folderId={folderInfo._id}
                 handleFolderClick={handleFolderClick}
