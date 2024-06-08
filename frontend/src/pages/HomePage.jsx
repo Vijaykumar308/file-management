@@ -19,7 +19,7 @@ function HomePage() {
   const {isAuthencated} = useSelector(state => state.auth);
 
   const handleFolderClick= (folderName)=>{
-    setNavigatorPath([...navigatorPath,folderName])
+    setNavigatorPath([...navigatorPath, folderName])
   }
   
   const handleGoBack =()=>{   

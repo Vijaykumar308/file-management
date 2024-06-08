@@ -8,10 +8,7 @@ export default function FolderComponent({folderName,handleFolderClick}) {
   const handleGoInside = () => {
     // setShowFolder([{ id: 101, name: "vijay"}]);
     handleFolderClick(folderName)
-   
   }
-
-
 
   return (
     <>
