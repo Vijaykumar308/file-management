@@ -7,10 +7,14 @@ import  FolderComponent from "../components/FolderComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDirectories } from "../redux/dirReducer";
 import {jwtDecode} from "jwt-decode";
+import { AUTHENCATION } from "../redux/authReducer";
+
+
 
 function HomePage() {
   const {showFolder, setShowFolder} = useContext(AppContext);
   const [navigatorPath,setNavigatorPath] = useState([])
+  const [folderStack, setFolderStack] = useState([]);
   const dispatch = useDispatch();
   const {dir, status, error} = useSelector(state => state.dir);
   const {isAuthencated} = useSelector(state => state.auth);
@@ -22,20 +26,31 @@ function HomePage() {
     
     dispatch(fetchDirectories({userId:decoded.id, parent_dir_id: folderId}));
     setNavigatorPath([...navigatorPath, folderName])
+    setFolderStack([...folderStack, folderId]);
   }
   
   const handleGoBack =()=>{  
     const userData = localStorage.getItem('user') || null;
     const user = JSON.parse(userData) || null;
     const decoded = jwtDecode(user.token);
-    
-    dispatch(fetchDirectories({userId:decoded.id, parent_dir_id: 'home'}));
-    
+    if((folderStack.length <= 1)) {
+      dispatch(fetchDirectories({userId:decoded.id, parent_dir_id:'home'}));
+      folderStack.pop();
+      setFolderStack(folderStack);
+    }
+    else {
+      dispatch(fetchDirectories({userId:decoded.id, parent_dir_id: folderStack[folderStack.length - 2]}));
+      folderStack.pop();
+      setFolderStack(folderStack);
+    }
+
     console.log(navigatorPath);
     const updatedPath = navigatorPath.slice(0, -1);
     setNavigatorPath(updatedPath);
   }
   
+  console.log('folder stack',folderStack);
+
   useEffect(()=> {
     const userData = localStorage.getItem('user') || null;
     const user = JSON.parse(userData) || null;
