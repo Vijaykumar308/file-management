@@ -14,8 +14,6 @@ function Header() {
     const [inputValue, setInputValue] = useState('');
     const dispatch = useDispatch();
 
-    
-
     const dropdownMenuItem = [
         {
             title: "Welcome User",
@@ -35,7 +33,6 @@ function Header() {
         setShowFolder(prevDivs => [...prevDivs, { id: prevDivs.length, name: value }]);;
     }
 
-    
     const openModal  = () => setIsModalOpen(true); 
     const closeModal = () => setIsModalOpen(false);
 

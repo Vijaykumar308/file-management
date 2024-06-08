@@ -7,9 +7,6 @@ import  FolderComponent from "../components/FolderComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDirectories } from "../redux/dirReducer";
 import {jwtDecode} from "jwt-decode";
-import { AUTHENCATION } from "../redux/authReducer";
-
-
 
 function HomePage() {
   const {showFolder, setShowFolder} = useContext(AppContext);
@@ -27,10 +24,16 @@ function HomePage() {
     setNavigatorPath([...navigatorPath, folderName])
   }
   
-  const handleGoBack =()=>{   
+  const handleGoBack =()=>{  
+    const userData = localStorage.getItem('user') || null;
+    const user = JSON.parse(userData) || null;
+    const decoded = jwtDecode(user.token);
+    
+    dispatch(fetchDirectories({userId:decoded.id, parent_dir_id: 'home'}));
+    
+    console.log(navigatorPath);
     const updatedPath = navigatorPath.slice(0, -1);
     setNavigatorPath(updatedPath);
-    console.log(navigatorPath);
   }
   
   useEffect(()=> {
