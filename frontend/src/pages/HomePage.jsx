@@ -14,7 +14,7 @@ import { AUTHENCATION } from "../redux/authReducer";
 function HomePage() {
   const {showFolder, setShowFolder} = useContext(AppContext);
   const [navigatorPath,setNavigatorPath] = useState([])
-  const [folderStack, setFolderStack] = useState([]);
+  const {folderStack, setFolderStack} = useContext(AppContext);
   const dispatch = useDispatch();
   const {dir, status, error} = useSelector(state => state.dir);
   const {isAuthencated} = useSelector(state => state.auth);

@@ -1,6 +1,6 @@
 import SearchInput from "./SearchInput";
 import { NavLink } from "react-router-dom";
-import { CircleUser, File, FolderOpen, Upload  } from 'lucide-react';
+import { CircleUser, File, FolderEdit, FolderOpen, Upload  } from 'lucide-react';
 import Dropdown from "./Dropdown";
 import { useContext, useEffect, useReducer, useState } from "react";
 import {useDispatch} from "react-redux"
@@ -12,8 +12,9 @@ function Header() {
     const  {setShowFolder}  = useContext(AppContext);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [inputValue, setInputValue] = useState('');
-    const dispatch = useDispatch();
+    const {folderStack, setFolderStack} = useContext(AppContext);
 
+    const dispatch = useDispatch();
     const dropdownMenuItem = [
         {
             title: "Welcome User",
@@ -37,7 +38,7 @@ function Header() {
     const closeModal = () => setIsModalOpen(false);
 
     const handleSave = (value, userId) => {
-        dispatch(createDir(value, userId))
+        dispatch(createDir(value, userId, folderStack[folderStack.length - 1]));
         setInputValue(value);
         closeModal();
         handleCreateFolder(value)

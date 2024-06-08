@@ -4,10 +4,11 @@ export const AppContext = createContext();
 
 function AppProvider({children}) {
     const [showFolder, setShowFolder] = useState([]);
+    const [folderStack, setFolderStack] = useState([]);
 
     return (
         <>
-            <AppContext.Provider value={{ showFolder, setShowFolder}} >
+            <AppContext.Provider value={{ showFolder, setShowFolder, folderStack, setFolderStack}} >
                 {children}
             </AppContext.Provider>
         </>
